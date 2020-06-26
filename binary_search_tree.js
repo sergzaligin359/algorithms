@@ -157,7 +157,30 @@ class Bst {
 
         return result;
     }
+    delete(value){
+        let newNode = new Node(value);
 
+        const searchTree = node => {
+            if(value < node.value){
+                searchTree(node.left);
+            }else if(value > node.value){
+                searchTree(node.right);
+            }else if(value === node.value){
+                if(node.left === null && node.right === null){
+                    node = null; 
+                }else if(node.left && (node.right === null)){
+                    
+                }else if(node.right && (node.left === null)){
+                    
+                }else if(node.left && node.right){
+
+                }
+            }
+        }
+
+        searchTree(this.root);
+
+    }
     // breadth first search - поиск в ширину - level by level
     bfs(){
         const result = [];
@@ -186,3 +209,7 @@ console.log('bst min', bst.min());
 console.log('bst in order', bst.dfsInOrder());
 console.log('bst pre order', bst.dfsPreOrder());
 console.log('bst post order', bst.dfsPostOrder());
+
+bst.delete(7);
+
+console.log('bst in order', bst.dfsInOrder());
