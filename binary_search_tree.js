@@ -17,6 +17,13 @@
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Алгоритм поиска наибольшего элемента
 //  Идем от корня направо до несуществующего узла
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Алгоритмы обхода дерева
+//  1. in-order - симметричный обход (left, root, right) sort data
+//  2. pre-order - прямой обход (root, left, right) copy
+//  3. post-order -  обратный обход (left, right, root) delete all nodes
+
+
 
 class Node {
     constructor(value) {
@@ -30,7 +37,7 @@ class Bst {
 
     constructor(value) {
         this.root = new Node(value);
-        this.count = 0;
+        this.count = 1;
     } 
 
     size(){
@@ -96,21 +103,57 @@ class Bst {
     dfsInOrder(){
         const result = [];
 
+        const traverse = node => {
+
+            if(node.left) traverse(node.left);
+
+            result.push(node.value);
+
+            if(node.right) traverse(node.right);
+
+        };
+
+        traverse(this.root);
+
         return result;
     }
 
-    // pre-order - обратный обход
+    // pre-order - прямой обход 
     // root, left, right
     dfsPreOrder(){
         const result = [];
 
+        const traverse = node => {
+
+            result.push(node.value);
+
+            if(node.left) traverse(node.left);
+
+            if(node.right) traverse(node.right);
+
+        };
+        
+        traverse(this.root);
+
         return result;
     }
 
-    // post-order
-    // left, right, root прямой обход 
+    // post-order  - обратный обход
+    // left, right, root
     dfsPostOrder(){
         const result = [];
+
+        const traverse = node => {
+
+            if(node.left) traverse(node.left);
+
+            if(node.right) traverse(node.right);
+
+            result.push(node.value);
+
+        };
+        
+        traverse(this.root);
 
         return result;
     }
@@ -124,12 +167,22 @@ class Bst {
 
 }
 
-const bst = new Bst();
+const arr2 = [9, 3, 10, 2, 7, 1, 12, 6, 11, 14];
+const bst = new Bst(9);
 
-bst.insert(100);
-bst.insert(1);
-bst.insert(2);
 bst.insert(3);
+bst.insert(10);
+bst.insert(2);
+bst.insert(7);
+bst.insert(1);
+bst.insert(12);
+bst.insert(6);
+bst.insert(11);
+bst.insert(14);
 
-    
-console.log('bst', bst)
+console.log('bst', bst);
+console.log('bst max', bst.max());
+console.log('bst min', bst.min());
+console.log('bst in order', bst.dfsInOrder());
+console.log('bst pre order', bst.dfsPreOrder());
+console.log('bst post order', bst.dfsPostOrder());
