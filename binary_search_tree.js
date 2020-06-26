@@ -91,7 +91,7 @@ class Bst {
 
     // dfs - depth firs search - поиск в глубину - branch by branch
 
-    // in-order
+    // in-order - симметричный обход
     // left, root, right
     dfsInOrder(){
         const result = [];
@@ -99,7 +99,7 @@ class Bst {
         return result;
     }
 
-    // pre-order
+    // pre-order - обратный обход
     // root, left, right
     dfsPreOrder(){
         const result = [];
@@ -108,7 +108,7 @@ class Bst {
     }
 
     // post-order
-    // left, right, root
+    // left, right, root прямой обход 
     dfsPostOrder(){
         const result = [];
 
